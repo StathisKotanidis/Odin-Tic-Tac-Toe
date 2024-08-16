@@ -1,62 +1,130 @@
 /* General styling */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 li {
-    list-style: none;
+  list-style: none;
 }
 
 button:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 body {
-    min-height: 100vh;
-    background-color: rgba(24, 163, 128, 0.744);
-    font-family: "Raleway", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
+  min-height: 100vh;
+  background-color: rgba(24, 163, 128, 0.744);
+  font-family: "Raleway", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Starting screen styling */
 
 .starting-screen {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  /* display: none; */
 }
 
 .starting-screen h1 {
-    font-size: 3rem;
-    color: rgb(5, 81, 82);
+  font-size: 3rem;
+  color: rgb(5, 81, 82);
 }
 
 .starting-screen button {
-    background-color: rgb(5, 81, 82);
-    color: black;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 10px;
-    gap: 0.5rem;
-    font-size: 1.4rem;
+  background-color: rgb(5, 81, 82);
+  color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  gap: 0.5rem;
+  font-size: 1.4rem;
 }
 
 .starting-screen button:hover {
-    transform: scale(1.1);
-    border-radius: 20%
+  transform: scale(1.1);
+  border-radius: 20%;
 }
 
 .starting-screen img {
-    width: 20px;
+  width: 20px;
 }
+
+/* Players section styling */
+
+.players-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  padding: 1rem;
+  gap: 2rem;
+  display: none;
+}
+
+.player-container {
+  background-color: rgb(147, 152, 156);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+  gap: 2rem;
+  padding: 2rem;
+}
+
+.player-container h2 {
+  color: rgb(5, 81, 82);
+  font-size: 3rem;
+}
+
+.player-container label,
+.player-container p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgb(5, 81, 82);
+}
+
+.player-container input {
+  padding: 5px;
+}
+
+.player-container p {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.player-container i {
+  font-size: 3rem;
+}
+
+.player-container i:hover {
+  cursor: pointer;
+}
+
+.players-section button {
+  background-color: rgb(147, 152, 156);
+  color: rgb(5, 81, 82);
+  font-size: 1.3rem;
+  grid-column: span 2;
+  padding: 10px;
+  width: 50%;
+  margin-left: 10rem;
+}
+
+#proceed-to-gameboard:disabled {
+  font-size: 1.5rem;
+  cursor: not-allowed;
+}
+
+/* Gameboard section styling */
