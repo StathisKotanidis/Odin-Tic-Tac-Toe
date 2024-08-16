@@ -127,4 +127,75 @@ body {
   cursor: not-allowed;
 }
 
-/* Gameboard section styling */
+/* Gameboard-container  section styling */
+
+.gameboard-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  height: 700px;
+  width: 90%;
+  display: none;
+}
+
+.gameboard-container div {
+  border: 1px solid red;
+}
+
+.player-one-score {
+  grid-column: 1/2;
+  grid-row: 1/5;
+}
+
+.current-player {
+  grid-column: 2/4;
+  grid-row: 1/2;
+  display: flex;
+  align-items: center;
+  padding: 2rem;
+  gap: 0.5rem;
+}
+
+
+.player-two-score {
+  grid-column: 4/5;
+  grid-row: 1/5;
+
+}
+
+.gameboard {
+  grid-column: 2/4;
+  grid-row: 2/5;
+}
+
+.player-score {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem;
+  align-items: center;
+}
+
+.player-score span {
+  font-size: 1.5rem;
+  color: rgb(5, 81, 82);
+  font-weight: 600;
+}
+
+
+.player-score p {
+  font-size: 1.5rem;
+  color: rgb(5, 81, 82);
+  font-weight: 600;
+}
+
+.current-player p {
+  flex-basis: 80%;
+  border: 1px solid red;
+  padding: 2rem;
+}
+
+.current-player button {
+  flex-basis: 20%;
+  padding: 10px
+}
