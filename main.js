@@ -1,3 +1,7 @@
+function Player(name, marker) {
+  this.name = name;
+  this.marker = marker;
+}
 const startGameBtn = document.querySelector("#start-game-button");
 const startingScreen = document.querySelector(".starting-screen");
 const playersSectionScreen = document.querySelector(".players-section");
@@ -14,6 +18,8 @@ const playerTwoRightArrowBtn = document.querySelector(".player-two-right");
 const playerOneMarker = document.querySelector("#player-one-marker");
 const playerTwoMarker = document.querySelector("#player-two-marker");
 const showGameboardBtn = document.querySelector("#proceed-to-gameboard");
+const playerOneName = document.querySelector("#player-one-name");
+const playerTwoName = document.querySelector("#player-two-name");
 
 playerOneLeftArrowBtn.addEventListener("click", () => {
   playerOneMarker.innerHTML === "X"
@@ -55,13 +61,27 @@ function updateButtonState() {
   }
 }
 
-//disable the current content and enable the gameboard
-showGameboardBtn.addEventListener("click", () => {
+let player1Name;
+let player2Name;
+let player1Marker;
+let player2Marker;
+let player1;
+let player2;
+
+/*disable the current content and enable the gameboard 
+plus assigning my data to my players objects */
+
+showGameboardBtn.addEventListener("click", (e) => {
+  e.preventDefault();
   playersSectionScreen.style.display = "none";
+
+  player1Name = playerOneName.value;
+  player2Name = playerTwoName.value;
+  player1Marker = playerOneMarker.innerHTML;
+  player2Marker = playerTwoMarker.innerHTML;
+
+  player1 = new Player(player1Name, player1Marker);
+  player2 = new Player(player2Name, player2Marker);
 });
 
 const gameboard = [];
-
-let player1 = {};
-
-let player2 = {};
