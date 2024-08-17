@@ -58,28 +58,26 @@
     </section>
 
     <section class="gameboard-container">
-      <div class="player-score player-one-score">
+      <div class="player-info player-one-info">
         <span id="player-one-name-placeholder">Name placeholder</span>
         <p>
           Marker:
           <span id="player-one-marker-placeholder">Marker Placeholder</span>
         </p>
-        <p>Score: <span>0</span></p>
+        <p>Score: <span id="player-one-score">0</span></p>
       </div>
-      <div class="player-score player-two-score">
+      <div class="player-info player-two-info">
         <span id="player-two-name-placeholder">Name placeholder</span>
         <p>
           Marker:
           <span id="player-two-marker-placeholder">Marker Placeholder</span>
         </p>
-        <p>Score: <span>0</span></p>
+        <p>Score: <span id="player-two-score">0</span></p>
       </div>
       <div class="gameboard"></div>
       <div class="current-player">
-        <p id="current-player-paragraph">
-          <span id="current-player">Player Name</span>'s turn
-        </p>
-        <button><i class="bx bx-revision"></i></button>
+        <span id="current-player"> </span>
+        <button id="reset-button"><i class="bx bx-revision"></i></button>
       </div>
     </section>
 

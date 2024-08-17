@@ -147,7 +147,7 @@ body {
   display: none;
 }
 
-.player-one-score {
+.player-one-info {
   grid-column: 1/2;
   grid-row: 1/5;
 }
@@ -161,7 +161,7 @@ body {
   gap: 0.5rem;
 }
 
-.player-two-score {
+.player-two-info {
   grid-column: 4/5;
   grid-row: 1/5;
 }
@@ -174,7 +174,7 @@ body {
   padding: 1rem;
 }
 
-.player-score {
+.player-info {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -182,19 +182,19 @@ body {
   align-items: center;
 }
 
-.player-score span {
+.player-info span {
   font-size: 3rem;
   color: rgb(5, 81, 82);
   font-weight: 600;
 }
 
-.player-score p {
+.player-info p {
   font-size: 3rem;
   color: rgb(5, 81, 82);
   font-weight: 600;
 }
 
-.current-player p {
+.current-player span {
   flex-basis: 80%;
   padding: 2rem;
   font-size: 2.5rem;
@@ -204,7 +204,18 @@ body {
 
 .current-player button {
   flex-basis: 20%;
-  padding: 10px;
+  padding: 20px;
+  background-color: rgb(81, 139, 110);
+  border: rgb(81, 139, 110);
+}
+
+.current-player button i {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.current-player button:hover {
+  cursor: pointer;
 }
 
 .gameboard-div {

@@ -11,9 +11,6 @@ const showGameboardBtn = document.querySelector("#proceed-to-gameboard");
 const playerOneName = document.querySelector("#player-one-name");
 const playerTwoName = document.querySelector("#player-two-name");
 const gameBoardContainer = document.querySelector(".gameboard-container");
-const currentPlayerParagraph = document.querySelector(
-  "#current-player-paragraph"
-);
 const playerOneNamePlaceholder = document.querySelector(
   "#player-one-name-placeholder"
 );
@@ -28,6 +25,9 @@ const playerTwoMarkerPlaceholder = document.querySelector(
 );
 const currentPlayer = document.querySelector("#current-player");
 const gameBoard = document.querySelector(".gameboard");
+const resetBtn = document.querySelector("#reset-button");
+let playerOneScore = document.querySelector("#player-one-score");
+let playerTwoScore = document.querySelector("#player-two-score");
 
 const gameboard = [];
 
@@ -124,7 +124,7 @@ showGameboardBtn.addEventListener("click", (e) => {
 
   function getRandomPlayer(obj1, obj2) {
     let startingPlayer = Math.random() < 0.5 ? player1 : player2;
-    currentPlayer.innerHTML = startingPlayer.name;
+    currentPlayer.innerHTML = `${startingPlayer.name}'s turn`;
     return startingPlayer;
   }
 
@@ -145,11 +145,16 @@ showGameboardBtn.addEventListener("click", (e) => {
 
           if (winCondition(player1, player2)) {
             disableBoard();
+            updateScore();
+            clearBoard();
             return;
           }
 
-          current_player =
-            current_player.name === player1.name ? player2 : player1;
+          if (current_player === player1) {
+            current_player = player2;
+          } else {
+            current_player = player1;
+          }
           currentPlayer.innerHTML = `${current_player.name}'s turn`;
         }
       });
@@ -157,7 +162,7 @@ showGameboardBtn.addEventListener("click", (e) => {
   }
 
   /* 4.This function checks for every possible win condition
-  and if not then we get a fraw*/
+  and if not then we get a draw*/
 
   function winCondition(obj1, obj2) {
     if (
@@ -165,112 +170,112 @@ showGameboardBtn.addEventListener("click", (e) => {
       gameboard[1].innerHTML === obj1.marker &&
       gameboard[2].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[0].innerHTML === obj2.marker &&
       gameboard[1].innerHTML === obj2.marker &&
       gameboard[2].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     } else if (
       gameboard[3].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[5].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[3].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[5].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     } else if (
       gameboard[6].innerHTML === obj1.marker &&
       gameboard[7].innerHTML === obj1.marker &&
       gameboard[8].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[6].innerHTML === obj2.marker &&
       gameboard[7].innerHTML === obj2.marker &&
       gameboard[8].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     } else if (
       gameboard[0].innerHTML === obj1.marker &&
       gameboard[3].innerHTML === obj1.marker &&
       gameboard[6].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[0].innerHTML === obj2.marker &&
       gameboard[3].innerHTML === obj2.marker &&
       gameboard[6].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     } else if (
       gameboard[1].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[7].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[1].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[7].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     } else if (
       gameboard[2].innerHTML === obj1.marker &&
       gameboard[5].innerHTML === obj1.marker &&
       gameboard[8].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[2].innerHTML === obj2.marker &&
       gameboard[5].innerHTML === obj2.marker &&
       gameboard[8].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     } else if (
       gameboard[0].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[8].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[0].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[8].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     } else if (
       gameboard[2].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[6].innerHTML === obj1.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      currentPlayer.innerHTML = `${obj1.name} won!`;
       return true;
     } else if (
       gameboard[2].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[6].innerHTML === obj2.marker
     ) {
-      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      currentPlayer.innerHTML = `${obj2.name} won!`;
       return true;
     }
     return false;
@@ -282,12 +287,32 @@ showGameboardBtn.addEventListener("click", (e) => {
   }
 
   /*6. A function that updates the score */
-  // function updateScore(){
+  function updateScore() {
+    if (winCondition(player1, player2)) {
+      let currentPlayerOneScore = parseInt(playerOneScore.innerText);
+      let newPlayerOneScore = currentPlayerOneScore + 1;
+      playerOneScore.innerHTML = newPlayerOneScore;
+    } else {
+      let currentPlayerTwoScore = parseInt(playerTwoScore.innerText);
+      let newPlayerTwoScore = currentPlayerTwoScore + 1;
+      playerTwoScore.innerHTML = newPlayerTwoScore;
+    }
+  }
 
-  // }
-  /* 5. The last function that is the actual game.
+  /* 6. A function that resets the board */
+  function clearBoard() {
+    resetBtn.addEventListener("click", () => {
+      gameboard.forEach((cell) => {
+        cell.innerHTML = "";
+        cell.classList.remove("disabled");
+      });
+      gameBoard.classList.remove("disabled-board");
+      playerMove(); //bug
+    });
+  }
+
+  /* 7. The last function that is the actual game.
   It combine all the functions above*/
-
   function playGame() {
     createGameBoard();
     playerMove();
