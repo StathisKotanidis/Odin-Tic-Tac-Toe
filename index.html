@@ -1,80 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Odin | Tic Tac Toe</title>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Odin | Tic Tac Toe</title>
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <body>
+    <section class="starting-screen">
+      <h1>Tic Tac Toe</h1>
+      <button id="start-game-button">
+        Start Game <img src="assets/tic-tac-toe.png" alt="tic-tac-toe" />
+      </button>
+    </section>
 
-<body>
-  <section class="starting-screen">
-    <h1>Tic Tac Toe</h1>
-    <button id="start-game-button">
-      Start Game <img src="assets/tic-tac-toe.png" alt="tic-tac-toe" />
-    </button>
-  </section>
+    <section class="players-section">
+      <div class="player-container player1-container">
+        <h2>Player 1</h2>
 
-  <section class="players-section">
-    <div class="player-container player1-container">
-      <h2>Player 1</h2>
+        <label for="player-one-name">Choose your name</label>
+        <input id="player-one-name" type="text" required />
 
-      <label for="player-one-name">Choose your name</label>
-      <input id="player-one-name" type="text" required />
+        <p>
+          Pick your marker :
+          <i class="bx bx-chevron-left player-one-left"></i>
+          <span id="player-one-marker">X</span>
+          <i class="bx bx-chevron-right player-one-right"></i>
+        </p>
+      </div>
+      <div class="player-container player2-container">
+        <h2>Player 2</h2>
 
-      <p>
-        Pick your marker :
-        <i class="bx bx-chevron-left player-one-left"></i>
-        <span id="player-one-marker">X</span>
-        <i class="bx bx-chevron-right player-one-right"></i>
-      </p>
-    </div>
-    <div class="player-container player2-container">
-      <h2>Player 2</h2>
+        <label for="player-two-name">Choose your name</label>
+        <input id="player-two-name" type="text" required />
 
-      <label for="player-two-name">Choose your name</label>
-      <input id="player-two-name" type="text" required />
+        <p>
+          Pick your marker :
+          <i class="bx bx-chevron-left player-two-left"></i>
+          <span id="player-two-marker">O</span>
+          <i class="bx bx-chevron-right player-two-right"></i>
+        </p>
+      </div>
 
-      <p>
-        Pick your marker :
-        <i class="bx bx-chevron-left player-two-left"></i>
-        <span id="player-two-marker">O</span>
-        <i class="bx bx-chevron-right player-two-right"></i>
-      </p>
-    </div>
+      <button id="proceed-to-gameboard">Let's play</button>
+    </section>
 
-    <button id="proceed-to-gameboard">Let's play</button>
-  </section>
+    <section class="gameboard-container">
+      <div class="player-score player-one-score">
+        <span id="player-one-name-placeholder">Name placeholder</span>
+        <p>
+          Marker:
+          <span id="player-one-marker-placeholder">Marker Placeholder</span>
+        </p>
+        <p>Score: <span>0</span></p>
+      </div>
+      <div class="player-score player-two-score">
+        <span id="player-two-name-placeholder">Name placeholder</span>
+        <p>
+          Marker:
+          <span id="player-two-marker-placeholder">Marker Placeholder</span>
+        </p>
+        <p>Score: <span>0</span></p>
+      </div>
+      <div class="gameboard"></div>
+      <div class="current-player">
+        <p><span>Player Name</span>'s turn</p>
+        <button><i class="bx bx-revision"></i></button>
+      </div>
+    </section>
 
-
-  <section class="gameboard-container">
-    <div class="player-score player-one-score">
-      <span id="player-one-name-placeholder">Name placeholder</span>
-      <p>Marker: <span id="player-one-marker-placeholder">Marker Placeholder</span></p>
-      <p>Score: <span>0</span></p>
-    </div>
-    <div class="player-score player-two-score">
-      <span id="player-two-name-placeholder">Name placeholder</span>
-      <p>Marker: <span id="player-two-marker-placeholder">Marker Placeholder</span></p>
-      <p>Score: <span>0</span></p>
-    </div>
-    <div class="gameboard">
-      Gameboard will be here
-    </div>
-    <div class="current-player">
-      <p><span>Player Name</span>'s turn</p>
-      <button><i class='bx bx-revision'></i></button>
-    </div>
-  </section>
-
-  <script src="main.js"></script>
-</body>
-
+    <script src="main.js"></script>
+  </body>
 </html>
