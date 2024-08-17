@@ -11,6 +11,10 @@ const showGameboardBtn = document.querySelector("#proceed-to-gameboard");
 const playerOneName = document.querySelector("#player-one-name");
 const playerTwoName = document.querySelector("#player-two-name");
 const gameBoardContainer = document.querySelector('.gameboard-container')
+const playerOneNamePlaceholder = document.querySelector('#player-one-name-placeholder')
+const playerTwoNamePlaceholder = document.querySelector('#player-two-name-placeholder')
+const playerOneMarkerPlaceholder = document.querySelector('#player-one-marker-placeholder')
+const playerTwoMarkerPlaceholder = document.querySelector('#player-two-marker-placeholder')
 
 
 function Player(name, marker) {
@@ -84,6 +88,12 @@ showGameboardBtn.addEventListener("click", (e) => {
   player2 = new Player(player2Name, player2Marker);
 
   gameBoardContainer.style.display = 'grid'
+
+  //Updating Players Names/Markes based on the input i chose in the previous section
+  playerOneNamePlaceholder.innerHTML = player1.name
+  playerTwoNamePlaceholder.innerHTML = player2.name
+  playerOneMarkerPlaceholder.innerHTML = player1.marker
+  playerTwoMarkerPlaceholder.innerHTML = player2.marker
 });
 
 
