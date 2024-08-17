@@ -23,6 +23,7 @@ const playerOneMarkerPlaceholder = document.querySelector(
 const playerTwoMarkerPlaceholder = document.querySelector(
   "#player-two-marker-placeholder"
 );
+const currentPlayer = document.querySelector("#current-player");
 const gameBoard = document.querySelector(".gameboard");
 
 function Player(name, marker) {
@@ -103,7 +104,49 @@ showGameboardBtn.addEventListener("click", (e) => {
   playerOneMarkerPlaceholder.innerHTML = player1.marker;
   playerTwoMarkerPlaceholder.innerHTML = player2.marker;
 
-  //a function that checks all possible senarios of winning the gam
+  /**************** The actual game functions ****************/
+
+  //1.This function created the gameboard and stores that in my gameboard array
+
+  function createGameBoard() {
+    for (let i = 1; i <= 9; i++) {
+      let gameboardDiv = document.createElement("div");
+      gameboardDiv.className = `gameboard-div div-${i}`;
+      gameboard.push(gameboardDiv);
+      gameBoard.appendChild(gameboardDiv);
+    }
+  }
+
+  // 2. Randomly chooses which player goes first and return that players object
+
+  function getRandomPlayer(obj1, obj2) {
+    let startingPlayer = Math.random() < 0.5 ? player1 : player2;
+    currentPlayer.innerHTML = startingPlayer.name;
+    return startingPlayer;
+  }
+
+  /*3. This function allows the player to pick his 'div' 
+  and switch after that*/
+
+  function playerMove() {
+    let currentPlayer = getRandomPlayer(player1, player2);
+
+    gameBoard.addEventListener("click", (e) => {
+      if (e.target.classList.contains("gameboard-div")) {
+        e.target.innerHTML = currentPlayer.marker;
+      }
+
+      if (currentPlayer.name === player1.name) {
+        currentPlayer = player2;
+      } else {
+        currentPlayer = player1;
+      }
+    });
+  }
+
+  /* 4.This function checks for every possible win condition
+  and if not then we get a fraw*/
+
   function winCondition() {
     if (
       gameboard[0] === player1.marker &&
@@ -205,18 +248,13 @@ showGameboardBtn.addEventListener("click", (e) => {
       console.log("It's a draw");
     }
   }
+
+  /* 5. The last function that is the actual game.
+  It combine all the functions above*/
+
+  function playGame() {}
+
+  // playerMove();
 });
 
-function createGameBoard() {
-  for (let i = 1; i <= 9; i++) {
-    let gameboardDiv = document.createElement("div");
-    gameboardDiv.innerHTML = `${i}`;
-    gameboardDiv.className = `gameboard-div div-${i}`;
-    gameboard.push(gameboardDiv);
-    gameBoard.appendChild(gameboardDiv);
-  }
-}
-
-createGameBoard();
-
-console.log(gameboard);
+// createGameBoard();

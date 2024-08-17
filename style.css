@@ -192,6 +192,8 @@ body {
   flex-basis: 80%;
   border: 1px solid red;
   padding: 2rem;
+  font-size: 2rem;
+  font-weight: 500;
 }
 
 .current-player button {
@@ -207,4 +209,8 @@ body {
   color: rgb(5, 81, 82);
   font-weight: 600;
   border: 1px solid black;
+}
+
+.gameboard-div:hover {
+  cursor: pointer;
 }
