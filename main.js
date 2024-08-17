@@ -11,6 +11,9 @@ const showGameboardBtn = document.querySelector("#proceed-to-gameboard");
 const playerOneName = document.querySelector("#player-one-name");
 const playerTwoName = document.querySelector("#player-two-name");
 const gameBoardContainer = document.querySelector(".gameboard-container");
+const currentPlayerParagraph = document.querySelector(
+  "#current-player-paragraph"
+);
 const playerOneNamePlaceholder = document.querySelector(
   "#player-one-name-placeholder"
 );
@@ -26,6 +29,8 @@ const playerTwoMarkerPlaceholder = document.querySelector(
 const currentPlayer = document.querySelector("#current-player");
 const gameBoard = document.querySelector(".gameboard");
 
+const gameboard = [];
+
 function Player(name, marker) {
   this.name = name;
   this.marker = marker;
@@ -33,8 +38,6 @@ function Player(name, marker) {
 
 let player1;
 let player2;
-
-const gameboard = [];
 
 startGameBtn.addEventListener("click", () => {
   startingScreen.style.display = "none";
@@ -109,9 +112,9 @@ showGameboardBtn.addEventListener("click", (e) => {
   //1.This function created the gameboard and stores that in my gameboard array
 
   function createGameBoard() {
-    for (let i = 1; i <= 9; i++) {
+    for (let i = 0; i <= 8; i++) {
       let gameboardDiv = document.createElement("div");
-      gameboardDiv.className = `gameboard-div div-${i}`;
+      gameboardDiv.className = `gameboard-div div-${i + 1}`;
       gameboard.push(gameboardDiv);
       gameBoard.appendChild(gameboardDiv);
     }
@@ -129,132 +132,166 @@ showGameboardBtn.addEventListener("click", (e) => {
   and switch after that*/
 
   function playerMove() {
-    let currentPlayer = getRandomPlayer(player1, player2);
+    let current_player = getRandomPlayer(player1, player2);
 
-    gameBoard.addEventListener("click", (e) => {
-      if (e.target.classList.contains("gameboard-div")) {
-        e.target.innerHTML = currentPlayer.marker;
-      }
+    gameboard.forEach((cell) => {
+      cell.addEventListener("click", (e) => {
+        if (
+          e.target.classList.contains("gameboard-div") &&
+          !e.target.classList.contains("disabled")
+        ) {
+          e.target.innerHTML = current_player.marker;
+          e.target.classList.add("disabled");
 
-      if (currentPlayer.name === player1.name) {
-        currentPlayer = player2;
-      } else {
-        currentPlayer = player1;
-      }
+          if (winCondition(player1, player2)) {
+            disableBoard();
+            return;
+          }
+
+          current_player =
+            current_player.name === player1.name ? player2 : player1;
+          currentPlayer.innerHTML = `${current_player.name}'s turn`;
+        }
+      });
     });
   }
 
   /* 4.This function checks for every possible win condition
   and if not then we get a fraw*/
 
-  function winCondition() {
+  function winCondition(obj1, obj2) {
     if (
-      gameboard[0] === player1.marker &&
-      gameBoard[1] === player1.marker &&
-      gameBoard[2] === player1.marker
+      gameboard[0].innerHTML === obj1.marker &&
+      gameboard[1].innerHTML === obj1.marker &&
+      gameboard[2].innerHTML === obj1.marker
     ) {
-      console.log("Player 1 won!");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[0] === player2.marker &&
-      gameBoard[1] === player2.marker &&
-      gameBoard[2] === player2.marker
+      gameboard[0].innerHTML === obj2.marker &&
+      gameboard[1].innerHTML === obj2.marker &&
+      gameboard[2].innerHTML === obj2.marker
     ) {
-      console.log("Player 2 won!");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     } else if (
-      gameboard[3] === player1.marker &&
-      gameBoard[4] === player1.marker &&
-      gameBoard[5] === player1.marker
+      gameboard[3].innerHTML === obj1.marker &&
+      gameboard[4].innerHTML === obj1.marker &&
+      gameboard[5].innerHTML === obj1.marker
     ) {
-      console.log("Player 1 won");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[3] === player2.marker &&
-      gameBoard[4] === player2.marker &&
-      gameBoard[5] === player2.marker
+      gameboard[3].innerHTML === obj2.marker &&
+      gameboard[4].innerHTML === obj2.marker &&
+      gameboard[5].innerHTML === obj2.marker
     ) {
-      console.log("Playe 2 won!");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     } else if (
-      gameboard[6] === player1.marker &&
-      gameBoard[7] === player1.marker &&
-      gameBoard[8] === player1.marker
+      gameboard[6].innerHTML === obj1.marker &&
+      gameboard[7].innerHTML === obj1.marker &&
+      gameboard[8].innerHTML === obj1.marker
     ) {
-      console.log("Player 1 won!");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[6] === player2.marker &&
-      gameBoard[7] === player2.marker &&
-      gameBoard[8] === player2.marker
+      gameboard[6].innerHTML === obj2.marker &&
+      gameboard[7].innerHTML === obj2.marker &&
+      gameboard[8].innerHTML === obj2.marker
     ) {
-      console.log("Player 2 won!");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     } else if (
-      gameboard[0] === player1.marker &&
-      gameBoard[3] === player1.marker &&
-      gameBoard[6] === player1.marker
+      gameboard[0].innerHTML === obj1.marker &&
+      gameboard[3].innerHTML === obj1.marker &&
+      gameboard[6].innerHTML === obj1.marker
     ) {
-      console.log("Player 1 won!");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[0] === player2.marker &&
-      gameBoard[3] === player2.marker &&
-      gameBoard[6] === player2.marker
+      gameboard[0].innerHTML === obj2.marker &&
+      gameboard[3].innerHTML === obj2.marker &&
+      gameboard[6].innerHTML === obj2.marker
     ) {
-      console.log("Player 2 won!");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     } else if (
-      gameboard[1] === player1.marker &&
-      gameBoard[4] === player1.marker &&
-      gameBoard[7] === player1.marker
+      gameboard[1].innerHTML === obj1.marker &&
+      gameboard[4].innerHTML === obj1.marker &&
+      gameboard[7].innerHTML === obj1.marker
     ) {
-      console.log("Player 1 won!");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[1] === player2.marker &&
-      gameBoard[4] === player2.marker &&
-      gameBoard[7] === player2.marker
+      gameboard[1].innerHTML === obj2.marker &&
+      gameboard[4].innerHTML === obj2.marker &&
+      gameboard[7].innerHTML === obj2.marker
     ) {
-      console.log("Player 2 won!");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     } else if (
-      gameboard[2] === player1.marker &&
-      gameBoard[5] === player1.marker &&
-      gameBoard[8] === player1.marker
+      gameboard[2].innerHTML === obj1.marker &&
+      gameboard[5].innerHTML === obj1.marker &&
+      gameboard[8].innerHTML === obj1.marker
     ) {
-      console.log("player 1 won!");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[2] === player2.marker &&
-      gameBoard[5] === player2.marker &&
-      gameBoard[8] === player2.marker
+      gameboard[2].innerHTML === obj2.marker &&
+      gameboard[5].innerHTML === obj2.marker &&
+      gameboard[8].innerHTML === obj2.marker
     ) {
-      console.log("Player 2 won!");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     } else if (
-      gameboard[0] === player1.marker &&
-      gameBoard[4] === player1.marker &&
-      gameBoard[8] === player1.marker
+      gameboard[0].innerHTML === obj1.marker &&
+      gameboard[4].innerHTML === obj1.marker &&
+      gameboard[8].innerHTML === obj1.marker
     ) {
-      console.log("Player 1 won!");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[0] === player2.marker &&
-      gameBoard[4] === player2.marker &&
-      gameBoard[8] === player2.marker
+      gameboard[0].innerHTML === obj2.marker &&
+      gameboard[4].innerHTML === obj2.marker &&
+      gameboard[8].innerHTML === obj2.marker
     ) {
-      console.log("Player 2 won!");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     } else if (
-      gameboard[2] === player1.marker &&
-      gameBoard[4] === player1.marker &&
-      gameBoard[6] === player1.marker
+      gameboard[2].innerHTML === obj1.marker &&
+      gameboard[4].innerHTML === obj1.marker &&
+      gameboard[6].innerHTML === obj1.marker
     ) {
-      console.log("Player 1 won!");
+      currentPlayerParagraph.innerHTML = `${obj1.name} won!`;
+      return true;
     } else if (
-      gameboard[2] === player2.marker &&
-      gameBoard[4] === player2.marker &&
-      gameBoard[6] === player2.marker
+      gameboard[2].innerHTML === obj2.marker &&
+      gameboard[4].innerHTML === obj2.marker &&
+      gameboard[6].innerHTML === obj2.marker
     ) {
-      console.log("Player 2 won!");
-    } else {
-      console.log("It's a draw");
+      currentPlayerParagraph.innerHTML = `${obj2.name} won!`;
+      return true;
     }
+    return false;
   }
 
+  /* 5. A function to disable board after a win condition is achieved*/
+  function disableBoard() {
+    gameBoard.classList.add("disabled-board");
+  }
+
+  /*6. A function that updates the score */
+  // function updateScore(){
+
+  // }
   /* 5. The last function that is the actual game.
   It combine all the functions above*/
 
-  function playGame() {}
+  function playGame() {
+    createGameBoard();
+    playerMove();
+  }
 
-  // playerMove();
+  playGame();
 });
-
-// createGameBoard();

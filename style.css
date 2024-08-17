@@ -18,6 +18,15 @@ button:hover {
   cursor: pointer;
 }
 
+.disabled-board {
+  pointer-events: none;
+  opacity: 0.5; /* Optional: To visually indicate that the board is disabled */
+}
+
+.disabled {
+  pointer-events: none;
+}
+
 body {
   min-height: 100vh;
   background-color: rgba(24, 163, 128, 0.744);
@@ -32,12 +41,12 @@ body {
 .starting-screen {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 3rem;
   /* display: none; */
 }
 
 .starting-screen h1 {
-  font-size: 3rem;
+  font-size: 5rem;
   color: rgb(5, 81, 82);
 }
 
@@ -138,9 +147,6 @@ body {
   display: none;
 }
 
-/* .gameboard-container div {
-} */
-
 .player-one-score {
   grid-column: 1/2;
   grid-row: 1/5;
@@ -177,23 +183,23 @@ body {
 }
 
 .player-score span {
-  font-size: 1.5rem;
+  font-size: 3rem;
   color: rgb(5, 81, 82);
   font-weight: 600;
 }
 
 .player-score p {
-  font-size: 1.5rem;
+  font-size: 3rem;
   color: rgb(5, 81, 82);
   font-weight: 600;
 }
 
 .current-player p {
   flex-basis: 80%;
-  border: 1px solid red;
   padding: 2rem;
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: rgb(5, 81, 82);
 }
 
 .current-player button {
@@ -208,7 +214,42 @@ body {
   font-size: 3rem;
   color: rgb(5, 81, 82);
   font-weight: 600;
-  border: 1px solid black;
+}
+
+.gameboard-div.div-1 {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.gameboard-div.div-2 {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.gameboard-div.div-3 {
+  border-bottom: 1px solid black;
+}
+
+.gameboard-div.div-4 {
+  border-right: 1px solid black;
+}
+
+.gameboard-div.div-5 {
+  border-right: 1px solid black;
+}
+
+.gameboard-div.div-7 {
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.gameboard-div.div-8 {
+  border-right: 1px solid black;
+  border-top: 1px solid black;
+}
+
+.gameboard-div.div-9 {
+  border-top: 1px solid black;
 }
 
 .gameboard-div:hover {
