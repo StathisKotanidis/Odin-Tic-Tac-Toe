@@ -20,7 +20,8 @@ button:hover {
 
 .disabled-board {
   pointer-events: none;
-  opacity: 0.5; /* Optional: To visually indicate that the board is disabled */
+  opacity: 0.5;
+  /* Optional: To visually indicate that the board is disabled */
 }
 
 .disabled {

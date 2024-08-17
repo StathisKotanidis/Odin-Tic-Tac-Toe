@@ -120,7 +120,7 @@ showGameboardBtn.addEventListener("click", (e) => {
     }
   }
 
-  // 2. Randomly chooses which player goes first and return that players object
+  // 2.A function that randomly chooses which player goes first and return that players object
 
   function getRandomPlayer(obj1, obj2) {
     let startingPlayer = Math.random() < 0.5 ? player1 : player2;
@@ -128,11 +128,22 @@ showGameboardBtn.addEventListener("click", (e) => {
     return startingPlayer;
   }
 
-  /*3. This function allows the player to pick his 'div' 
-  and switch after that*/
+  /*3. A function that showcase tha actual match against 
+  2 players*/
 
-  function playerMove() {
+  function startNewGame() {
+
+    // Remove all previous event listeners by replacing the gameboard elements
+    gameboard.forEach(cell => {
+      const newCell = cell.cloneNode(true);
+      cell.replaceWith(newCell);
+
+      // Update the gameboard array to refer to the new cells
+      gameboard[gameboard.indexOf(cell)] = newCell;
+    });
+
     let current_player = getRandomPlayer(player1, player2);
+    currentPlayer.innerHTML = `${current_player.name}'s turn`;
 
     gameboard.forEach((cell) => {
       cell.addEventListener("click", (e) => {
@@ -143,25 +154,23 @@ showGameboardBtn.addEventListener("click", (e) => {
           e.target.innerHTML = current_player.marker;
           e.target.classList.add("disabled");
 
-          if (winCondition(player1, player2)) {
+          let result = winCondition(player1, player2);
+          if (result) {
             disableBoard();
-            updateScore();
-            clearBoard();
+            if (result !== "draw") {
+              updateScore(result);
+            }
             return;
           }
 
-          if (current_player === player1) {
-            current_player = player2;
-          } else {
-            current_player = player1;
-          }
+          current_player = current_player === player1 ? player2 : player1;
           currentPlayer.innerHTML = `${current_player.name}'s turn`;
         }
       });
     });
   }
 
-  /* 4.This function checks for every possible win condition
+  /* 4. A function that checks for every possible win condition
   and if not then we get a draw*/
 
   function winCondition(obj1, obj2) {
@@ -171,114 +180,121 @@ showGameboardBtn.addEventListener("click", (e) => {
       gameboard[2].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[0].innerHTML === obj2.marker &&
       gameboard[1].innerHTML === obj2.marker &&
       gameboard[2].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     } else if (
       gameboard[3].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[5].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[3].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[5].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     } else if (
       gameboard[6].innerHTML === obj1.marker &&
       gameboard[7].innerHTML === obj1.marker &&
       gameboard[8].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[6].innerHTML === obj2.marker &&
       gameboard[7].innerHTML === obj2.marker &&
       gameboard[8].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     } else if (
       gameboard[0].innerHTML === obj1.marker &&
       gameboard[3].innerHTML === obj1.marker &&
       gameboard[6].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[0].innerHTML === obj2.marker &&
       gameboard[3].innerHTML === obj2.marker &&
       gameboard[6].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     } else if (
       gameboard[1].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[7].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[1].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[7].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     } else if (
       gameboard[2].innerHTML === obj1.marker &&
       gameboard[5].innerHTML === obj1.marker &&
       gameboard[8].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[2].innerHTML === obj2.marker &&
       gameboard[5].innerHTML === obj2.marker &&
       gameboard[8].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     } else if (
       gameboard[0].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[8].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[0].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[8].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     } else if (
       gameboard[2].innerHTML === obj1.marker &&
       gameboard[4].innerHTML === obj1.marker &&
       gameboard[6].innerHTML === obj1.marker
     ) {
       currentPlayer.innerHTML = `${obj1.name} won!`;
-      return true;
+      return obj1;
     } else if (
       gameboard[2].innerHTML === obj2.marker &&
       gameboard[4].innerHTML === obj2.marker &&
       gameboard[6].innerHTML === obj2.marker
     ) {
       currentPlayer.innerHTML = `${obj2.name} won!`;
-      return true;
+      return obj2;
     }
-    return false;
+
+    const isDraw = gameboard.every(cell => cell.innerHTML !== "");
+    if (isDraw) {
+      currentPlayer.innerHTML = "It's a draw!";
+      return "draw";
+    }
+
+    return null;
   }
 
   /* 5. A function to disable board after a win condition is achieved*/
@@ -288,7 +304,8 @@ showGameboardBtn.addEventListener("click", (e) => {
 
   /*6. A function that updates the score */
   function updateScore() {
-    if (winCondition(player1, player2)) {
+    let winner = winCondition(player1, player2)
+    if (winner === player1) {
       let currentPlayerOneScore = parseInt(playerOneScore.innerText);
       let newPlayerOneScore = currentPlayerOneScore + 1;
       playerOneScore.innerHTML = newPlayerOneScore;
@@ -299,24 +316,28 @@ showGameboardBtn.addEventListener("click", (e) => {
     }
   }
 
-  /* 6. A function that resets the board */
+
   function clearBoard() {
-    resetBtn.addEventListener("click", () => {
-      gameboard.forEach((cell) => {
-        cell.innerHTML = "";
-        cell.classList.remove("disabled");
-      });
-      gameBoard.classList.remove("disabled-board");
-      playerMove(); //bug
+
+    gameboard.forEach((cell) => {
+      cell.innerHTML = "";
+      cell.classList.remove("disabled");
     });
+
+    gameBoard.classList.remove("disabled-board");
+
+
+    startNewGame();
   }
 
   /* 7. The last function that is the actual game.
   It combine all the functions above*/
   function playGame() {
     createGameBoard();
-    playerMove();
+    startNewGame();
   }
 
-  playGame();
+  playGame()
+
+  resetBtn.addEventListener("click", clearBoard);
 });
